@@ -1,9 +1,15 @@
 import java.util.*;
-public class Post {
-    public static void main(String[] args){
-        String ID;
+class Post {
+        int id;
         String date;
         String category;
         String title;
+        String content;
+        Post(int id, String date, String category, String title, String content){
+            this.id=id;
+            this.date=date;
+            this.category=category;
+            this.title=title;
+            this.content=content;
+        }
     }
-}
