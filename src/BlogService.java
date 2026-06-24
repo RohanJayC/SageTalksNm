@@ -4,8 +4,9 @@ import java.time.LocalDate;
 class BlogService{
     ArrayList<Post> Posts= new ArrayList<>();
     Scanner sc=new Scanner(System.in);
+    int nextId=1;// Counter variable for number of posts which prevents duplication of post IDs
     void createPost(){
-        int id=Posts.size()+1;
+        int id=nextId++;
         System.out.println("Enter your title:");
         String title=sc.nextLine();
         System.out.println("Enter the category of your post:");
@@ -24,6 +25,7 @@ class BlogService{
         for(Post p:Posts){
             if(p.id==editID){
                 found=true;
+                System.out.println("------------------------------");
                 System.out.println("Edited Content:");
                 p.content=sc.next();break;
 
@@ -58,11 +60,12 @@ class BlogService{
         for(Post p:Posts){
             if(p.id==viewID){
                 found=true;
-                System.out.println(p.id);
-                System.out.println(p.date);
-                System.out.println(p.category);
-                System.out.println(p.title);
-                System.out.println(p.content);
+                System.out.println("------------------------------");
+                System.out.println("ID: "+p.id);
+                System.out.println("Date: "+p.date);
+                System.out.println("Category: "+p.category);
+                System.out.println("Title: "+p.title);
+                System.out.println("Content: "+p.content);
                 break;
             }
             if(!found){
@@ -74,11 +77,12 @@ class BlogService{
     }
     void viewAllPosts(){
         for(Post p:Posts){
-            System.out.println(p.id);
-            System.out.println(p.date);
-            System.out.println(p.category);
-            System.out.println(p.title);
-            System.out.println(p.content);
+            System.out.println("------------------------------");
+            System.out.println("ID: "+p.id);
+            System.out.println("Date: "+p.date);
+            System.out.println("Category: "+p.category);
+            System.out.println("Title: "+p.title);
+            System.out.println("Content: "+p.content);
         }
     }
 }
