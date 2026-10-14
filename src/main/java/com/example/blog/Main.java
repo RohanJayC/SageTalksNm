@@ -1,3 +1,5 @@
+package com.example.blog;
+
 import java.util.*;
 class Options{
     void acceptOption(int a, BlogService bs){

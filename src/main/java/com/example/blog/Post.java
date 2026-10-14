@@ -1,3 +1,5 @@
+package com.example.blog;
+
 import java.util.*;
 class Post {
         int id;
