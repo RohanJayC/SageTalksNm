@@ -1,5 +1,7 @@
 package com.example.blog;
 
+import com.example.blog.model.Post;
+
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
