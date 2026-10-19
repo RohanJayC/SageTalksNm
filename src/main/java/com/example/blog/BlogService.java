@@ -1,26 +1,24 @@
 package com.example.blog;
-
 import com.example.blog.model.Post;
-
-import java.util.*;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class BlogService {
-    ArrayList<Post> Posts = new ArrayList<>();
+    ArrayList<Post> posts = new ArrayList<>();
     Scanner sc = new Scanner(System.in);
-    int nextId = 1;// Counter variable for number of posts which prevents duplication of post IDs
+    int nextId = 1; // Counter for post IDs, prevents duplicates
 
     void createPost() {
-        int id = nextId++;
+        Long id = (long) nextId++;
         System.out.println("Enter your title:");
         String title = sc.nextLine();
         System.out.println("Enter the category of your post:");
         String category = sc.nextLine();
         System.out.println("Enter the contents of your post here:");
         String content = sc.nextLine();
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yy"));
-        Post p = new Post(id, date, category, title, content);
-        Posts.add(p);
+        Post p = new Post(id, LocalDate.now(), category, title, content);
+        posts.add(p);
         System.out.println("Your post has been created successfully!");
     }
 
@@ -28,11 +26,11 @@ class BlogService {
         System.out.println("Enter the post ID of the post you wish to edit:");
         int editID = sc.nextInt();
         sc.nextLine();
-        for (Post p : Posts) {
-            if (p.id == editID) {
+        for (Post p : posts) {
+            if (p.getId() == editID) {
                 System.out.println("------------------------------");
                 System.out.println("Edited Content:");
-                p.content = sc.next();
+                p.setContent(sc.nextLine());
                 return;
             }
         }
@@ -43,9 +41,9 @@ class BlogService {
         System.out.println("Enter the post ID of the post you wish to delete:");
         int delID = sc.nextInt();
         sc.nextLine();
-        for (int i = 0; i < Posts.size(); i++) {
-            if (Posts.get(i).id == delID) {//Searches through all Posts IDs until it finds the required one
-                Posts.remove(i);//Removes that post object from the ArrayList
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).getId() == delID) {
+                posts.remove(i);
                 System.out.println("Post deleted successfully");
                 return;
             }
@@ -57,14 +55,9 @@ class BlogService {
         System.out.println("Enter the post ID of the post you wish to view:");
         int viewID = sc.nextInt();
         sc.nextLine();
-        for (Post p : Posts) {
-            if (p.id == viewID) {
-                System.out.println("------------------------------");
-                System.out.println("ID: " + p.id);
-                System.out.println("Date: " + p.date);
-                System.out.println("Category: " + p.category);
-                System.out.println("Title: " + p.title);
-                System.out.println("Content: " + p.content);
+        for (Post p : posts) {
+            if (p.getId() == viewID) {
+                printPost(p);
                 return;
             }
         }
@@ -72,13 +65,17 @@ class BlogService {
     }
 
     void viewAllPosts() {
-        for (Post p : Posts) {
-            System.out.println("------------------------------");
-            System.out.println("ID: " + p.id);
-            System.out.println("Date: " + p.date);
-            System.out.println("Category: " + p.category);
-            System.out.println("Title: " + p.title);
-            System.out.println("Content: " + p.content);
+        for (Post p : posts) {
+            printPost(p);
         }
+    }
+
+    private void printPost(Post p) {
+        System.out.println("------------------------------");
+        System.out.println("ID: " + p.getId());
+        System.out.println("Date: " + p.getCreatedDate());
+        System.out.println("Category: " + p.getCategory());
+        System.out.println("Title: " + p.getTitle());
+        System.out.println("Content: " + p.getContent());
     }
 }

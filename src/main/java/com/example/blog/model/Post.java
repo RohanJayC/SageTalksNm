@@ -19,6 +19,9 @@ public class Post {
             this.title=title;
             this.content=content;
         }
+        public void setContent(String content) {
+        this.content = content;
+        }
 
     public Long getId() {
         return id;
@@ -39,4 +42,3 @@ public class Post {
     public String getContent() {
         return content;
     }
-}
