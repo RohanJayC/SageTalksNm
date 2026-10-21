@@ -1,5 +1,9 @@
 package com.example.blog.db;
+import com.example.blog.model.Post;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnection {
     public static void main(String[] args){
@@ -10,13 +14,16 @@ public class DatabaseConnection {
             Statement statement= conn.createStatement();//Sends SQL commands from java to the db and processes the result
             ResultSet resultSet= statement.executeQuery("SELECT id,created_date,category,title,content FROM blog ORDER BY id")){
             System.out.println("Connected");
+            List<Post> posts =new ArrayList<>();
             while(resultSet.next()) {
-                System.out.printf("%-5d",resultSet.getInt(1));
-                System.out.printf("%-12s",resultSet.getString(2));
-                System.out.printf("%-20s",resultSet.getString(3));
-                System.out.printf("%-50s",resultSet.getString(4));
-                System.out.printf("%-50s",resultSet.getString(5));
-                System.out.println();
+                Long id=resultSet.getLong("id");
+                LocalDate createdDate=resultSet.getDate("created_Date").toLocalDate();
+                String category=resultSet.getString("category");
+                String title=resultSet.getString("title");
+                String content=resultSet.getString("content");
+
+                Post post=new Post(id,createdDate,category,title,content);
+                posts.add(post);
             }
         }
         catch (SQLException e){
