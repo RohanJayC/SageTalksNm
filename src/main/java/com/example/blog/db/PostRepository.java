@@ -7,11 +7,8 @@ import java.util.List;
 
 public class PostRepository {
     public List<Post> displayAll() throws SQLException {
-        String url = System.getenv("DB_URL");
-        String user = System.getenv("DB_USER");
-        String password = System.getenv("DB_PASSWORD");
         List<Post> posts = new ArrayList<>();
-        try (Connection conn = DriverManager.getConnection(url, user, password);
+        try (Connection conn = Database.getConnection();
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT id,created_date,category,title,content FROM blog ORDER BY id")) {
             while (resultSet.next()) {

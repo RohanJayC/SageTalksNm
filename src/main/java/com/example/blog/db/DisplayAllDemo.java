@@ -2,8 +2,7 @@ package com.example.blog.db;
 import com.example.blog.model.Post;
 import java.sql.SQLException;
 import java.util.List;
-
-public class DatabaseConnection {
+public class DisplayAllDemo {
     public static void main(String[] args) {
         PostRepository repository = new PostRepository();
         try {
